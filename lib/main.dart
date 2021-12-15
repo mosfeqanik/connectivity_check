@@ -3,9 +3,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({ this.title});
+  MyHomePage({this.title});
 
   final String title;
 
@@ -41,15 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+
   void showConnectivitySnackBar(ConnectivityResult result) {
     final hasInternet = result != ConnectivityResult.none;
+
     final message = hasInternet
-        ? 'You have again ${result.toString()}'
+        ? (result == ConnectivityResult.wifi)
+            ? 'You have Internet Connection'
+            : 'You have Mobile data Connection'
         : 'You have no internet';
+
     final color = hasInternet ? Colors.green : Colors.red;
 
     Utils.showTopSnackBar(context, message, color);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
