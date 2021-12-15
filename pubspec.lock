@@ -44,7 +44,7 @@ packages:
     source: hosted
     version: "1.15.0"
   connectivity:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: connectivity
       url: "https://pub.dartlang.org"
@@ -136,7 +136,7 @@ packages:
     source: hosted
     version: "1.7.0"
   overlay_support:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: overlay_support
       url: "https://pub.dartlang.org"
