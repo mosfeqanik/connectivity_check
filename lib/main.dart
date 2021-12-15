@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connecticity_check/utils/topsnackbar.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.teal,
         ),
         home: MyHomePage(title: 'Flutter Connectivity check'),
       ),
@@ -34,7 +36,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  StreamSubscription subscription;
+  @override
+  void initState() {
+    super.initState();
 
+    subscription =
+        Connectivity().onConnectivityChanged.listen(showConnectivitySnackBar);
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+
+    super.dispose();
+  }
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -54,9 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Utils.showTopSnackBar(context, message, color);
   }
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
